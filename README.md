@@ -5,3 +5,7 @@ My first GitHub project
 - I enjoy: volleyball, makeup
 im taking this course to have a better understanding on computer science
 i would like to create a portfolio of all of my work
+
+
+## Collaborator : Evelyn
+- A rule about using AI tools is to make sure to use AI tools properly and to not misuse or abuse the power of AI
