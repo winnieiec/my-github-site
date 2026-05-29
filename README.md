@@ -10,4 +10,4 @@ i would like to create a portfolio of all of my work
 ## Collaborator : Evelyn
 - A rule about using AI tools is to make sure to use AI tools properly and to not misuse or abuse the power of AI
 
-Add collaborator entry 
+Add collaborator entry for Evelyn
