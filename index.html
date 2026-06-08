@@ -61,6 +61,22 @@
       [data-theme="dark"] a {
         color: #a78bfa;
       }
+
+      /* Stylized button link specifically for project actions */
+      .project-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 6px 12px;
+        background: var(--h2-color);
+        color: #ffffff !important;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: opacity 0.2s;
+      }
+      .project-btn:hover {
+        opacity: 0.85;
+      }
       
       /* Theme Toggle Button Layout */
       .theme-toggle {
@@ -231,9 +247,11 @@
 
     <h2>My Projects</h2>
     <div class="project-grid">
+      <!-- Project 1 updated with your Onshape Skateboard Project link -->
       <div class="project-card">
-        <h3>Project 1</h3>
-        <p>A short description of your first coding project or Python script goes here.</p>
+        <h3>Skateboard Design</h3>
+        <p>A 3D CAD modeling project of a custom skateboard created using precision part studios and assemblies in Onshape.</p>
+        <a href="https://cad.onshape.com/documents/0d8904d536188bdb73e300ab/w/18da571375648448a7e6b5d6/e/d41a078094eb99ad830d7335?renderMode=0&uiState=6a26e187783c6290abda49d3" target="_blank" class="project-btn">View 3D Model</a>
       </div>
       <div class="project-card">
         <h3>Project 2</h3>
@@ -264,34 +282,3 @@
       // Countdown timer logic
       function updateCountdown() {
         const today = new Date();
-        const currentYear = today.getFullYear();
-        
-        // Target date: June 26th of the current year (Note: Months are 0-indexed, 5 = June)
-        let targetDate = new Date(currentYear, 5, 26);
-        
-        // Set hours to midnight to ensure accurate daily tracking
-        today.setHours(0,0,0,0);
-        targetDate.setHours(0,0,0,0);
-
-        // If June 26th has completely passed, set target to June 26th of next year
-        if (today > targetDate) {
-          targetDate = new Date(currentYear + 1, 5, 26);
-          targetDate.setHours(0,0,0,0);
-        }
-
-        // Calculate time difference in milliseconds and convert to whole days
-        const timeDiff = targetDate.getTime() - today.getTime();
-        const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-
-
-
-
-
-
-
-
-
-
-
-
-
