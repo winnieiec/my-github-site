@@ -36,23 +36,7 @@
         overflow-x: hidden; /* Prevents scrollbars while the heading slides in */
       }
       
-      /* Animated Welcome Message */
-      h1 { 
-        color: var(--h1-color); 
-        animation: slideInLeft 0.8s ease-out forwards;
-      }
-
-      /* Main content fade-in setup */
-      h2, p, .project-grid {
-        opacity: 0; /* Hidden before animation starts */
-        animation: fadeIn 1s ease-out forwards;
-      }
-
-      /* Delays to create a clean sequential flow */
-      h2 { animation-delay: 0.5s; }
-      p  { animation-delay: 0.7s; }
-      .project-grid { animation-delay: 0.9s; }
-
+      h1   { color: var(--h1-color); }
       h2   { color: var(--h2-color); border-bottom: 2px solid var(--h2-color); margin-top: 30px; }
       p    { line-height: 1.6; }
       
@@ -121,15 +105,35 @@
         color: var(--h2-color);
       }
 
+      /* ==========================================================================
+         ANIMATIONS (Placed at the bottom to prevent properties from getting overwritten)
+         ========================================================================== */
+      
+      /* Animated Welcome Message */
+      h1 { 
+        animation: slideInLeft 0.8s ease-out forwards;
+      }
+
+      /* Apply invisible state and animation blueprint to sections */
+      h2, p, .project-grid {
+        opacity: 0; 
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      /* Staggered load delays */
+      h2 { animation-delay: 0.4s; }
+      p  { animation-delay: 0.7s; }
+      .project-grid { animation-delay: 1s; }
+
       /* Left-to-Right Entry Keyframe Animation */
       @keyframes slideInLeft {
         from {
           opacity: 0;
-          transform: translateX(-60px); /* Starts off-center to the left */
+          transform: translateX(-60px);
         }
         to {
           opacity: 1;
-          transform: translateX(0); /* Rests in its standard spot */
+          transform: translateX(0);
         }
       }
 
@@ -187,7 +191,6 @@
       const themeBtn = document.getElementById('themeBtn');
       
       themeBtn.addEventListener('click', () => {
-        // Toggle the data-theme attribute on the html root
         const currentTheme = document.documentElement.getAttribute('data-theme');
         if (currentTheme === 'dark') {
           document.documentElement.removeAttribute('data-theme');
