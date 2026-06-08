@@ -40,7 +40,6 @@
         max-width: 800px;
         margin: 0 auto; 
         padding: 20px; 
-        /* FIX: Use background-image instead of background to properly force gradients */
         background-image: var(--bg-gradient); 
         background-attachment: fixed; /* Keeps gradient smooth while scrolling */
         background-repeat: no-repeat;
@@ -254,11 +253,11 @@
         <a href="https://onshape.com" target="_blank" class="project-btn">View 3D Model</a>
       </div>
       
-      <!-- Project 2: Updated with your Code.org App Lab link -->
+      <!-- Project 2: Code.org App Lab Link -->
       <div class="project-card">
         <h3>Interactive App Design</h3>
         <p>A custom JavaScript application engineered with dynamic layouts and event listeners built entirely inside Code.org's App Lab.</p>
-        <a href="https://studio.code.org/projects/applab/8821c731-6f00-4640-b2af-e0f25de4f66c" target="_blank" class="project-btn">Run Application</a>
+        <a href="https://code.org" target="_blank" class="project-btn">Run Application</a>
       </div>
     </div>
 
@@ -277,4 +276,4 @@
           document.documentElement.removeAttribute('data-theme');
           localStorage.setItem('theme', 'light');
         } else {
-
+          document.documentElement.setAttribute('data-theme', 'dark');
