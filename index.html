@@ -246,19 +246,20 @@
         const today = new Date();
         const currentYear = today.getFullYear();
         
-        // Target target date: June 26th of the current year
-        let targetDate = new Date(currentYear, 5, 26); // Note: Months are 0-indexed (5 = June)
+        // Target date: June 26th of the current year (Note: Months are 0-indexed, 5 = June)
+        let targetDate = new Date(currentYear, 5, 26);
         
-        // If June 26th has already passed this year, set target to June 26th of next year
-        if (today > targetDate) {
-          targetDate = new Date(currentYear + 1, 5, 26);
-        }
-
-        // Set the times to midnight to ensure exact day calculations
+        // Set hours to midnight to ensure accurate daily tracking
         today.setHours(0,0,0,0);
         targetDate.setHours(0,0,0,0);
 
-        // Calculate time difference in milliseconds and convert to days
+        // If June 26th has completely passed, set target to June 26th of next year
+        if (today > targetDate) {
+          targetDate = new Date(currentYear + 1, 5, 26);
+          targetDate.setHours(0,0,0,0);
+        }
+
+        // Calculate time difference in milliseconds and convert to whole days
         const timeDiff = targetDate.getTime() - today.getTime();
         const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
@@ -278,6 +279,7 @@
     </script>
   </body>
 </html>
+
 
 
 
