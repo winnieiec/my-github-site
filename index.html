@@ -8,7 +8,7 @@
       /* Define variables for easy theme swapping */
       :root {
         --bg-gradient: linear-gradient(135deg, #d8b4fe, #e9d5ff, #f3e8ff); /* Light purple to lavender gradient */
-        --card-bg: rgba(255, 255, 255, 0.85); /* Slightly translucent white for cards */
+        --card-bg: rgba(255, 255, 255, 0.9); /* Slightly translucent white for cards */
         --text-color: #3b0764; /* Deep, dark purple for high contrast body text */
         --h1-color: #581c87; /* Rich royal purple */
         --h2-color: #6b21a8; /* Vibrant mid-dark purple */
@@ -29,15 +29,23 @@
         --countdown-text: #f3e8ff;
       }
 
+      html, body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+      }
+
       body { 
         font-family: Arial, sans-serif; 
         max-width: 800px;
         margin: 0 auto; 
         padding: 20px; 
-        background: var(--bg-gradient); /* Applied the new gradient */
+        /* FIX: Use background-image instead of background to properly force gradients */
+        background-image: var(--bg-gradient); 
         background-attachment: fixed; /* Keeps gradient smooth while scrolling */
+        background-repeat: no-repeat;
         color: var(--text-color);
-        transition: background 0.3s, color 0.3s; /* Smooth transition */
+        transition: background-image 0.3s, color 0.3s; /* Smooth transition */
         overflow-x: hidden; /* Prevents scrollbars while the heading slides in */
       }
       
@@ -275,9 +283,7 @@
         const timeDiff = targetDate.getTime() - today.getTime();
         const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-        // Display results on screen
-        const daysElement = document.getElementById('daysRemaining');
-        const boxElement = document.getElementById('schoolCountdown');
+
 
 
 
