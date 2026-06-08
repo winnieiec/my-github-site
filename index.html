@@ -13,6 +13,8 @@
         --h1-color: #1F4E79;
         --h2-color: #2E75B6;
         --shadow: rgba(0, 0, 0, 0.1);
+        --countdown-bg: #e6f2ff;
+        --countdown-text: #1F4E79;
       }
 
       /* Dark mode variable overrides */
@@ -23,6 +25,8 @@
         --h1-color: #4ea8de;
         --h2-color: #72efdd;
         --shadow: rgba(0, 0, 0, 0.4);
+        --countdown-bg: #1e293b;
+        --countdown-text: #4ea8de;
       }
 
       body { 
@@ -78,6 +82,31 @@
         transform: rotate(180deg);
       }
 
+      /* Countdown Container Styling */
+      .countdown-box {
+        background: var(--countdown-bg);
+        color: var(--countdown-text);
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 2px 4px var(--shadow);
+        border: 1px solid var(--countdown-text);
+        transition: background 0.3s, color 0.3s, border 0.3s;
+      }
+
+      .countdown-box span {
+        font-size: 1.4rem;
+        color: #e67e22;
+        margin: 0 5px;
+      }
+
+      [data-theme="dark"] .countdown-box span {
+        color: #f1c40f;
+      }
+
       /* Projects Grid Layout */
       .project-grid {
         display: grid;
@@ -115,12 +144,13 @@
       }
 
       /* Apply invisible state and animation blueprint to sections */
-      h2, p, .project-grid {
+      h2, p, .project-grid, .countdown-box {
         opacity: 0; 
         animation: fadeIn 1s ease-out forwards;
       }
 
       /* Staggered load delays */
+      .countdown-box { animation-delay: 0.2s; }
       h2 { animation-delay: 0.4s; }
       p  { animation-delay: 0.7s; }
       .project-grid { animation-delay: 1s; }
@@ -159,6 +189,11 @@
     </button>
 
     <h1>Hi, I'm Winnie!</h1>
+
+    <!-- Countdown Container placed exactly under the welcome message -->
+    <div class="countdown-box" id="schoolCountdown">
+      Days Until The Current School Year is Finished!: <span id="daysRemaining">--</span> days left
+    </div>
  
     <h2>About Me</h2>
     <p>I am a 9th grade student at Energy Tech High School.</p>
@@ -186,21 +221,64 @@
       </div>
     </div>
 
-    <!-- Script to toggle themes -->
+    <!-- Script to toggle themes and handle countdown -->
     <script>
+      // Theme toggling functionality
       const themeBtn = document.getElementById('themeBtn');
-      
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+
       themeBtn.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         if (currentTheme === 'dark') {
           document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
         } else {
           document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
         }
       });
+
+      // Countdown timer logic
+      function updateCountdown() {
+        const today = new Date();
+        const currentYear = today.getFullYear();
+        
+        // Target target date: June 26th of the current year
+        let targetDate = new Date(currentYear, 5, 26); // Note: Months are 0-indexed (5 = June)
+        
+        // If June 26th has already passed this year, set target to June 26th of next year
+        if (today > targetDate) {
+          targetDate = new Date(currentYear + 1, 5, 26);
+        }
+
+        // Set the times to midnight to ensure exact day calculations
+        today.setHours(0,0,0,0);
+        targetDate.setHours(0,0,0,0);
+
+        // Calculate time difference in milliseconds and convert to days
+        const timeDiff = targetDate.getTime() - today.getTime();
+        const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        // Display results on screen
+        const daysElement = document.getElementById('daysRemaining');
+        const boxElement = document.getElementById('schoolCountdown');
+
+        if (daysLeft === 0) {
+          boxElement.innerHTML = "🎉 The current school year is finished! Enjoy your summer! 🎉";
+        } else {
+          daysElement.textContent = daysLeft;
+        }
+      }
+
+      // Run the countdown on page load
+      updateCountdown();
     </script>
   </body>
 </html>
+
 
 
 
